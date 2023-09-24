@@ -10,12 +10,6 @@ namespace Application.Services
         public UserService(IUnitOfWork unitOfWork, IMapper mapper) : base(unitOfWork, mapper)
         { }
 
-        public async Task<User> GetUser(int id)
-        {
-            var user = await _unitOfWork.User.GetById(id);
-            return _mapper.Map<User>(user);
-        }
-
         public User? GetUser(string name, string password)
         {
             if (string.IsNullOrWhiteSpace(name))
@@ -29,6 +23,11 @@ namespace Application.Services
 
             var user = _unitOfWork.User.GetUser(name, password);
             return _mapper.Map<User>(user);
+        }
+
+        public void UpdateToken(int userId, string token)
+        {
+            _unitOfWork.User.UpdateToken(userId, token);
         }
 	}
 }

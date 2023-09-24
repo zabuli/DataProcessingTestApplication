@@ -37,14 +37,17 @@ namespace EmproverTestApplication.Controllers
                 var secretKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("thisisasecretkey@123123123123123123"));
                 var signinCredentials = new SigningCredentials(secretKey, SecurityAlgorithms.HmacSha256);
                 var jwtSecurityToken = new JwtSecurityToken(
-                    issuer: "ABCXYZ",
+                    issuer: user.Id.ToString(),
                     audience: "http://localhost:7129",
                     claims: new List<Claim>(),
                     expires: DateTime.Now.AddMinutes(20),
                     signingCredentials: signinCredentials
                 );
+                var token = new JwtSecurityTokenHandler().WriteToken(jwtSecurityToken);
 
-                return Ok(new JwtSecurityTokenHandler().WriteToken(jwtSecurityToken));
+                _userService.UpdateToken(user.Id, token);
+
+                return Ok(token);
             }
             catch (Exception ex)
             { 

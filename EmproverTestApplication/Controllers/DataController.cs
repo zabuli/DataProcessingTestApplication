@@ -58,7 +58,7 @@ namespace EmproverTestApplication.Controllers
         }
 
         [HttpPost]
-        //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         public ContentResult Query(QueryModel query)
         {
             try

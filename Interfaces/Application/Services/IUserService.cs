@@ -4,7 +4,7 @@ namespace Interfaces.Application.Services
 {
 	public interface IUserService
 	{
-        Task<User> GetUser(int id);
         User? GetUser(string name, string password);
+        void UpdateToken(int userId, string token);
     }
 }

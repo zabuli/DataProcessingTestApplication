@@ -20,5 +20,17 @@ namespace Repository.Repositories
 
 			return DbContext?.User?.FirstOrDefault(x => name.Equals(x.Name) && password.Equals(x.Password));
 		}
+
+		public void UpdateToken(int userId, string token)
+		{
+			var user = DbContext?.User?.Find(userId);
+			if (user == null)
+			{
+				return;
+			}
+
+			user.Token = token;
+			DbContext.SaveChanges();
+		}
 	}
 }
