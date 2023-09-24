@@ -1,5 +1,1 @@
-<<<<<<< HEAD
-# DataProcessingTestApplication
-=======
-# DataProcessingTestApplication
->>>>>>> 022c919392d0218d9aa269ca91c83788ca7d7f31
+This application is for test purposes. I included there simple REST API application with inion architecture and EF Core migrations.
