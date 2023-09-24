@@ -27,7 +27,7 @@ namespace Repository.Repositories
             }
 
             var indicatorsDtos = DbContext?.Indicator?
-                                    .Where(x => x.SymbolId == symbol.Id && indicatorsNames.Contains(x.Name) && x.TimeFrom >= symbol.TimeFrom && x.TimeTo <= symbol.TimeTo)
+                                    .Where(x => indicatorsNames.Contains(x.Name) && x.TimeFrom >= symbol.TimeFrom && x.TimeTo <= symbol.TimeTo)
                                     .Include(x => x.Parameters).ToList();
             if (indicatorsDtos == null || !indicatorsDtos.Any())
             {

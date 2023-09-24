@@ -4,7 +4,6 @@
 	{
         public int Id { get; private set; }
         public string? Name { get; private set; }
-        public int SymbolId { get; private set; }
         public DateTime TimeFrom { get; private set; }
         public DateTime TimeTo { get; private set; }
         public string? Execution { get; private set; }
