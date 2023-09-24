@@ -1,0 +1,30 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Repository\" />
+    <None Remove="Repository\Database\" />
+    <None Remove="Repository\Repositories\" />
+    <None Remove="Application\" />
+    <None Remove="Application\Services\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Repository\" />
+    <Folder Include="Repository\Database\" />
+    <Folder Include="Repository\Repositories\" />
+    <Folder Include="Application\" />
+    <Folder Include="Application\Services\" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.22" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Application.Contract\Application.Contract.csproj" />
+    <ProjectReference Include="..\Domain\Domain.csproj" />
+  </ItemGroup>
+</Project>
