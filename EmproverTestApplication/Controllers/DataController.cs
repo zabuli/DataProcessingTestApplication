@@ -1,7 +1,5 @@
-﻿using System.Text;
-using DataProcessingApplication.Helpers;
+﻿using DataProcessingApplication.Helpers;
 using DataProcessingApplication.Models;
-using Domain.Models;
 using Interfaces.Application.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
