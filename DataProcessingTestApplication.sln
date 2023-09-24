@@ -1,9 +1,9 @@
-﻿
+
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 25.0.1706.4
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataProcessingApplication", "EmproverTestApplication\DataProcessingApplication.csproj", "{7B2F4886-E4E3-447D-90D0-3920B7798AAB}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataProcessingApplication", "DataProcessingApplication\DataProcessingApplication.csproj", "{7B2F4886-E4E3-447D-90D0-3920B7798AAB}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{0C5F6EE2-C77F-475D-A67B-7ED151EE6DB0}"
 EndProject

@@ -5,7 +5,7 @@ using Interfaces.Application.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 
-namespace EmproverTestApplication.Controllers
+namespace DataProcessingApplication.Controllers
 {
     [ApiController]
     [Route("api/[controller]/[action]")]
