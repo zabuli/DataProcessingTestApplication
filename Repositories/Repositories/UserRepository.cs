@@ -1,4 +1,5 @@
-﻿using Application.Contract.Dtos;
+﻿using System.Xml.Linq;
+using Application.Contract.Dtos;
 using Interfaces.Repository.Repositories;
 using Repositories;
 using Repositories.Database;
@@ -20,6 +21,16 @@ namespace Repository.Repositories
 
 			return DbContext?.User?.FirstOrDefault(x => name.Equals(x.Name) && password.Equals(x.Password));
 		}
+
+		public UserDto? GetUser(string token)
+		{
+            if (string.IsNullOrWhiteSpace(token))
+            {
+                return null;
+            }
+
+            return DbContext?.User?.FirstOrDefault(x => token.Equals(x.Token));
+        }
 
 		public void UpdateToken(int userId, string token)
 		{

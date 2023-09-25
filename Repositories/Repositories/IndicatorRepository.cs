@@ -36,5 +36,28 @@ namespace Repository.Repositories
 
             return IndicatorHelper.GetFilteredIndicators(indicators, indicatorsDtos);
         }
-    }
+
+        public IEnumerable<IndicatorDto>? GetIndicatorsByName(string? name, int? userId)
+        {
+            if (string.IsNullOrWhiteSpace(name))
+            {
+                return null;
+            }
+
+            return DbContext?.Indicator?.Where(x => name.Equals(x.Name))
+                        .Include(x => x.Parameters.Where(y => y.UserId == userId));
+        }
+
+        public IndicatorDto? GetIndicator(string? name, DateTime timeFrom, DateTime timeTo)
+        {
+            if (string.IsNullOrWhiteSpace(name))
+            {
+                return null;
+            }
+
+            return DbContext?.Indicator?
+                .Include(x => x.Parameters)
+                .FirstOrDefault(x => name.Equals(x.Name) && x.TimeFrom >= timeFrom && x.TimeTo <= timeTo);
+        }
+     }
 }

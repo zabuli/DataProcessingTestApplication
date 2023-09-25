@@ -33,5 +33,27 @@ namespace Application.Services
                 return false;
             }
         }
-	}
+
+        public IEnumerable<Indicator>? GetIndicators(string? name, int? userId)
+        {
+            if (string.IsNullOrWhiteSpace(name))
+            {
+                throw new ArgumentNullException(name);
+            }
+
+            var indicators = _unitOfWork.Indicator.GetIndicatorsByName(name, userId);
+            return indicators == null ? null : _mapper.Map<IEnumerable<Indicator>>(indicators);
+        }
+
+        public Indicator? StoreIndicator(Indicator? indicator)
+        {
+            if (indicator == null)
+            {
+                throw new ArgumentNullException("indicator");
+            }
+
+            var indicatorDto = _unitOfWork.Indicator.Insert(_mapper.Map<IndicatorDto>(indicator));
+            return indicatorDto == null ? null : _mapper.Map<Indicator>(indicatorDto);
+        }
+    }
 }

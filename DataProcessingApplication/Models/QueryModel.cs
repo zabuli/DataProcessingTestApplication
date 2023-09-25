@@ -3,6 +3,6 @@
 	public class QueryModel
 	{
 		public SymbolModel Symbol { get; set; }
-		public IndicatorModel[] Indicators { get; set; }
+		public SymbolIndicatorModel[] Indicators { get; set; }
     }
 }

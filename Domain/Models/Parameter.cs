@@ -25,5 +25,17 @@
             Value = value;
             IsDefault = isDefault;
         }
+
+        public Parameter(string name, string value, int userId)
+        {
+            Name = name;
+            Value = value;
+            UserId = userId;
+        }
+
+        public void SetValue(string? value)
+        {
+            Value = value;
+        }
     }
 }

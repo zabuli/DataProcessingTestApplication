@@ -51,13 +51,23 @@
 
             Name = name;
             Execution = execution;
-            Parameters = parameters.Where((x, i) => i % 2 == 0).Select((x, i) => new Parameter(x, parameters[i + 1], true));
+            Parameters = GetParameters(parameters);
         }
 
         public bool IsValid()
         {
             return !string.IsNullOrWhiteSpace(Name) && Parameters != null
                 && Parameters.Any(y => !string.IsNullOrWhiteSpace(y.Name));
+        }
+
+        private static List<Parameter> GetParameters(string[] parameters)
+        {
+            var result = new List<Parameter>();
+            for(var i = 0; i < parameters.Length; i += 2)
+            {
+                result.Add(new Parameter(parameters[i], parameters[i + 1], true));
+            }
+            return result;
         }
 
         private static bool AreParametersValid(string name, string timeFrom, string timeTo, string execution, params string[] parameters)

@@ -1,6 +1,8 @@
 ﻿using Interfaces.Repository;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Repositories.Database;
+using static Microsoft.AspNetCore.Hosting.Internal.HostingApplication;
 
 namespace Repositories
 {
@@ -22,7 +24,7 @@ namespace Repositories
             return await DbContext.Set<T>().FindAsync(id);
         }
 
-        public void Insert(T entity)
+        public T Insert(T entity)
         {
             if (entity == null)
             {
@@ -30,9 +32,10 @@ namespace Repositories
             }
             DbSet.Add(entity);
             DbContext.SaveChanges();
+            return entity;
         }
 
-        public void Insert(IEnumerable<T> entities)
+        public IEnumerable<T> Insert(IEnumerable<T> entities)
         {
             foreach(var entity in entities)
             {
@@ -44,6 +47,35 @@ namespace Repositories
             }
 
             DbContext.SaveChanges();
+            return entities;
+        }
+
+        public T Update(T entity)
+        {
+            if (entity == null)
+            {
+                throw new ArgumentNullException("entity");
+            }
+            DbContext.Attach(entity);
+            DbContext.Entry(entity).State = EntityState.Modified;
+            DbContext.SaveChanges();
+            return entity;
+        }
+
+        public IEnumerable<T> Update(IEnumerable<T> entities)
+        {
+            foreach (var entity in entities)
+            {
+                if (entity == null)
+                {
+                    throw new ArgumentNullException("entity");
+                }
+                DbContext.Attach(entity);
+                DbContext.Entry(entity).State = EntityState.Modified;
+            }
+
+            DbContext.SaveChanges();
+            return entities;
         }
     }
 }

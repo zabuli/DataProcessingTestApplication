@@ -13,5 +13,11 @@ namespace DataProcessingApplication.Helpers
 				Indicators = queryModel.Indicators.Select(x => new Indicator(x.Name, x.Parameters.Select(y => new Parameter(y.Name, y.Value))))
             };
 		}
+
+		public static Indicator GetIndicator(IndicatorModel indicatorModel, int userId)
+		{
+			return new Indicator(0, indicatorModel.Name, indicatorModel.TimeFrom, indicatorModel.TimeTo, "",
+				indicatorModel.Parameters.Select(x => new Parameter(x.Name, x.Value, userId)));
+        }
 	}
 }
