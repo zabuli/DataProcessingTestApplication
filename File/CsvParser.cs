@@ -41,7 +41,7 @@ public static class CsvParser
                             data.Add(newObject);
                         }
                     }
-                    catch
+                    catch (Exception ex)
                     {
                         //logging
                         continue;
@@ -49,7 +49,7 @@ public static class CsvParser
                 }
             }
         }
-        catch (Exception)
+        catch (Exception ex)
         {
             throw;
         }

@@ -20,8 +20,6 @@ public class MyDbContext : DbContext
             .WithOne(e => e.Indicator)
             .HasForeignKey(e => e.IndicatorId)
             .HasPrincipalKey(e => e.Id);
-        modelBuilder.Entity<SymbolDto>()
-            .HasNoKey();
 
         var decimalProps = modelBuilder.Model
         .GetEntityTypes()
