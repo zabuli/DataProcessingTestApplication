@@ -2,5 +2,6 @@
 {
 	public interface IIndicatorService
 	{
-	}
+        bool ImportIndicators(Stream fileStream);
+    }
 }

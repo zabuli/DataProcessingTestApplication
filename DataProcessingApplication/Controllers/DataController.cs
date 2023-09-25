@@ -11,11 +11,13 @@ namespace DataProcessingApplication.Controllers
     [Route("api/[controller]/[action]")]
     public class DataController : ControllerBase
     {
+        private readonly IIndicatorService _indicatorService;
         private readonly ISymbolService _symbolService;
         private readonly IQueryService _queryService;
 
-        public DataController(ISymbolService symbolService, IQueryService queryService)
+        public DataController(IIndicatorService indicatorService, ISymbolService symbolService, IQueryService queryService)
         {
+            _indicatorService = indicatorService;
             _symbolService = symbolService;
             _queryService = queryService;
         }
@@ -52,9 +54,32 @@ namespace DataProcessingApplication.Controllers
 
         [HttpPost]
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
-        public async Task<ActionResult> ImportIndicators()
+        public async Task<ActionResult> ImportIndicators([FromForm] IFormFile file)
         {
-            return Ok();
+            if (file == null)
+            {
+                return BadRequest("File is mandatory.");
+            }
+
+            try
+            {
+                bool isFileValid;
+                using (var fileStream = file.OpenReadStream())
+                {
+                    isFileValid = _indicatorService.ImportIndicators(fileStream);
+                }
+
+                if (isFileValid)
+                {
+                    return Ok("File was imported successfully.");
+                }
+
+                return BadRequest("Something went wrong.");
+            }
+            catch (Exception ex)
+            {
+                return BadRequest("Something went wrong. " + ex.Message);
+            }
         }
 
         [HttpPost]

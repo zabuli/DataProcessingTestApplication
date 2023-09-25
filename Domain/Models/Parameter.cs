@@ -18,5 +18,12 @@
             Name = name;
             Value = value;
         }
+
+        public Parameter(string name, string value, bool isDefault)
+        {
+            Name = name;
+            Value = value;
+            IsDefault = isDefault;
+        }
     }
 }

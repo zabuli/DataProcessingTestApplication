@@ -16,9 +16,8 @@ namespace Application.Services
         {
             try
             {
-                const int SYMBOL_COLUMN_COUNT = 15;
-                var symbols = CsvParser.GetlData<Symbol>(fileStream, SYMBOL_COLUMN_COUNT, out bool isFileValid);
-                if (!isFileValid)
+                var symbols = CsvParser.GetlData<Symbol>(fileStream, out bool isFileValid);
+                if (!isFileValid || symbols?.Any() == false)
                 {
                     return false;
                 }

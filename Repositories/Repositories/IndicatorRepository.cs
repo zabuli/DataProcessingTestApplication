@@ -13,7 +13,7 @@ namespace Repository.Repositories
         {
         }
 
-        public IEnumerable<IndicatorDto>? GetSymbolIndicators(SymbolDto symbol, IEnumerable<IndicatorDto> indicators)
+        public IEnumerable<IndicatorDto>? GetSymbolIndicators(DateTime timeFrom, DateTime timeTo, IEnumerable<IndicatorDto> indicators)
         {
             if (!indicators.Any())
             {
@@ -27,7 +27,7 @@ namespace Repository.Repositories
             }
 
             var indicatorsDtos = DbContext?.Indicator?
-                                    .Where(x => indicatorsNames.Contains(x.Name) && x.TimeFrom >= symbol.TimeFrom && x.TimeTo <= symbol.TimeTo)
+                                    .Where(x => indicatorsNames.Contains(x.Name) && x.TimeFrom >= timeFrom && x.TimeTo <= timeTo)
                                     .Include(x => x.Parameters).ToList();
             if (indicatorsDtos == null || !indicatorsDtos.Any())
             {

@@ -4,7 +4,7 @@ using Microsoft.VisualBasic.FileIO;
 namespace File;
 public static class CsvParser
 {
-    public static List<T> GetlData<T>(Stream fileStream, int columnCount, out bool isFileValid)
+    public static List<T> GetlData<T>(Stream fileStream, out bool isFileValid)
     {
         var data = new List<T>();
         isFileValid = true;
@@ -19,7 +19,7 @@ public static class CsvParser
 
                 // Skip the row with the column names
                 var fields = csvParser.ReadFields();
-                if (fields == null || fields.Length <= columnCount - 1 || string.IsNullOrEmpty(fields[columnCount - 1]))
+                if (fields == null)
                 {
                     isFileValid = false;
                     return data;

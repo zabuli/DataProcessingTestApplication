@@ -1,5 +1,4 @@
 ﻿using Application.Contract.Dtos;
-using Application.Helpers;
 using AutoMapper;
 using Domain.Models;
 using Interfaces.Application.Services;
@@ -24,15 +23,14 @@ namespace Application.Services
 			query.Symbols = query.Symbols.Where(x => x.IsValid());
             
 			var symbol = query.Symbols.First();
-			var symbolsDto = _unitOfWork.Symbol.GetSymbols(symbol.Name, symbol.TimeFrom, symbol.TimeTo);
+			var symbolsDto = _unitOfWork.Symbol.GetSymbols(symbol.Name, symbol.TimeFrom, symbol.TimeTo)?.OrderBy(x => x.TimeFrom);
             if (symbolsDto == null || !symbolsDto.Any())
 			{
 				throw new KeyNotFoundException("No symbol found based on given data!");
 			}
 
-			var symbolDto = QueryHelper.GetSymbol(symbolsDto);
             var indicatorsFromQuery = _mapper.Map<IEnumerable<IndicatorDto>>(query.Indicators);
-            var indicatorsDto = _unitOfWork.Indicator.GetSymbolIndicators(symbolDto, indicatorsFromQuery);
+            var indicatorsDto = _unitOfWork.Indicator.GetSymbolIndicators(symbolsDto.First().TimeFrom, symbolsDto.Last().TimeTo, indicatorsFromQuery);
 			if (indicatorsDto == null || !indicatorsDto.Any())
 			{
                 throw new KeyNotFoundException("No indicator found based on given data!");
